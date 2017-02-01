@@ -1,6 +1,6 @@
 # Twitter
 
-This is the first release of hopefully many, at the moment you have to run three files one after the other in the following order, please don't kill me ill fix these in the next couple of days I developed this in a bit less than 10 days while also working full time, so please bare with me while I perfect it enough to be considered user friendly.
+This is the first release of hopefully many, at the moment you have to run three files one after the other in the following order, 'Tweety.py', 'Analyser.py', 'Re-ordering.py' I will fix these in the next couple of days I developed this in a bit less than 10 days while also working full time, so please bear with me while I perfect it enough to be considered usable by an non-expert.
 
 The program is made up at the moment of three files and will get a fourth one eventually
 
