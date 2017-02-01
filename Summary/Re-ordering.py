@@ -75,7 +75,7 @@ k=12
 kmeans = KMeans(n_clusters=k, random_state=0).fit(Matrix)
 labels = kmeans.labels_
 centroids = kmeans.cluster_centers_
-for i in range(8):
+for i in range(k):
 # select only data observations with cluster label == i
     ds = X[np.where(labels==i)]
     # plot the data observations
