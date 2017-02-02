@@ -1,7 +1,6 @@
-# Twitter
+# Twitter Sentiment Anlayser and Summariser 
 
-# This is the second release: 
-The software nows run directly from the 'main.py' file, as to make easier, the information below still applies in case you want to make tweaks in tool.the actual summarisation is on its way and should be done by friday night(fingers crossed). I will update this as soon as I can. Hopefully in the near future I will add the acurracy of the classifier and an example of the actual summarisation.
+The software runs directly from the 'main.py' file, as to make it easier, the information below applies only in case you want to make tweaks in the tool. The actual summarisation is on its way and should be done by friday night(fingers crossed). I will update this as soon as I can. Hopefully in the near future I will add the acurracy of the classifier and an example of the actual summarisation.
 
 The program is made up at the moment of three files and will get a fourth one eventually
 
