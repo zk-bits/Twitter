@@ -11,8 +11,6 @@ import csv
 import re 
 import operator  
 
-
-
 #This is a basic listener that just prints received tweets to stdout. 
 class StdOutListener(StreamListener):
 
@@ -28,7 +26,7 @@ class StdOutListener(StreamListener):
             #increases the number of tweets by one.
             self.num_tweets += 1
             #while the number of tweets is less than 5 it continues to write them into the file created above
-            if self.num_tweets < 1000 :                
+            if self.num_tweets < 1000:
                 tf.write(data)     
                 return True
             #When the number of tweets exceeds the one in the if statement it closes the connection and exits the progrm
@@ -47,17 +45,16 @@ class StdOutListener(StreamListener):
                         with open('text_tweets.txt','a') as tt:
                             for s in content:
                                 tt.write(s + "\n") 
-                                print s
+                                #Print s
                                
                         
                     return False
 
     def on_error(self, status):
         print status      
-
         
 
-if __name__ == '__main__':
+def main():
     #This handles Twitter authetification and the connection to Twitter Streaming API
     l = StdOutListener()
     auth = OAuthHandler(k.consumer_key, k.consumer_secret)
@@ -65,4 +62,4 @@ if __name__ == '__main__':
     stream = Stream(auth, l)
 
     #This line filter Twitter Streams to capture data by keywords
-    stream.filter(languages=["en"], track=[("#TuesdayMotivation")])
+    stream.filter(languages=["en"], track=[("Australia")])

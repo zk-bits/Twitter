@@ -1,3 +1,4 @@
 import nltk
 
-nltk.download('punkt')
+def run():
+    nltk.download('punkt')
