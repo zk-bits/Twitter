@@ -1,6 +1,12 @@
 # Twitter
 
-This is the first release of hopefully many, at the moment you have to run three files one after the other in the following order, 'Tweety.py', 'Analyser.py', 'Re-ordering.py' I will fix these in the next couple of days I developed this in a bit less than 10 days while also working full time, so please bear with me while I perfect it enough to be considered usable by an non-expert.
+# Edit:
+
+# This is the second release: 
+The software nows run directly from the 'main.py' file, as to make easier, the information below still applies in case you want to make tweaks in tool.the actual summarisation is on its way and should be done by friday night(fingers crossed). I will update this as soon as I can. Hopefully in the near future I will add the acurracy of the classifier and an example of the actual summarisation.
+
+# This is the first release: (of hopefully many) 
+At the moment you have to run three files one after the other in the following order, 'Tweety.py', 'Analyser.py', 'Re-ordering.py' I will fix these in the next couple of days I developed this in a bit less than 10 days while also working full time, so please bear with me while I perfect it enough to be considered usable by an non-expert.
 
 The program is made up at the moment of three files and will get a fourth one eventually
 
