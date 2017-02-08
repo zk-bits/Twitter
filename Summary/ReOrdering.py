@@ -1,4 +1,3 @@
-
 import re
 import math
 import itertools
@@ -7,9 +6,8 @@ from collections import Counter
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as pyplot
 
-
 def ReOrdering():
-    #first understadn this code so that we can manipulate it.
+    #this is the method used to get the string distance between tweets.
     WORD = re.compile(r'\w+')
     def get_cosine(vec1, vec2):
         intersection =  set(vec1.keys()) & set(vec2.keys())
@@ -42,7 +40,6 @@ def ReOrdering():
         for x, lineA in enumerate(lines):
             vectorA = text_to_vector(lineA)
             # Loop through lines again assigning y as the number of line we're on and lineB as it's text
-           
             for y, lineB in enumerate(itertools.islice(lines, count - x)):
                 vectorB = text_to_vector(lineB)
                 cosine = get_cosine(vectorA, vectorB)
@@ -58,34 +55,38 @@ def ReOrdering():
                 else:
                     Matrix[x][y] = 0.0   
                     x=y
-        for i, x in enumerate(Matrix):
-            if v in x:
-                with open("Summary/positive relations.txt", "a") as pt:
-                    X=np.array(Matrix)
-                    print X
-                    print i
-                    pt.write("Similarity: %s %s %s %s %s %s" % (max(Matrix[y]), "Position: ", (i,x.index(v)), "\n", MatrixWords[i][x.index(v)],"\n"))
-
-
+    
     X=np.array(Matrix)            
-    k=12
+    k=12    
     kmeans = KMeans(n_clusters=k, random_state=0).fit(Matrix)
     labels = kmeans.labels_
     centroids = kmeans.cluster_centers_
-    for i in range(12):
+    for i in range(k):
     # select only data observations with cluster label == i
         ds = X[np.where(labels==i)]
         # plot the data observations
         pyplot.plot(ds[:,0],ds[:,1],'o')
-    
-        print kmeans.labels_
+        #print kmeans.labels_
     
         # plot the centroids
         lines = pyplot.plot(centroids[i,0],centroids[i,1],'k')
         # make the centroid x's bigger
         pyplot.setp(lines,ms=15.0)
         pyplot.setp(lines,mew=2.0)
-    print{i: np.where(kmeans.labels_ == i)[0] for i in range(kmeans.n_clusters)}
+        data = {i: np.where(kmeans.labels_ == i)[0] for i in range(kmeans.n_clusters)}
+        #print data
+        
+    pyplot.show();  
+    
+    with open('Summary/positive.txt' ) as pt:
+        with open('Summary/paragraph.txt', 'w') as pt_out:
+            lines = pt.readlines()   
+            for d in data: 
+                pt_out.write(lines[d].replace('\n', '. '))
+                    
+
+                
     
     
+
 

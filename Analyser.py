@@ -2,28 +2,31 @@
 import re
 import csv
 import nltk
+from collections import OrderedDict
+import Summary.make_unique as unique
+
 
 #remember to delete all tweets with a photo or link not just the photo or link
 def Classify():
     #start process_tweet
     def processTweet(tweet):
-        # process the tweets
+        # Clean  the tweet sample
         #Convert to lower case
         tweet = tweet.lower()
-        #Convert www.* or https?://* to URL
+        #Remove www.* or https?://* to URL
         tweet = re.sub(r'((www.[^\s]+)|(https[^\s]+))','',tweet)
-        #Convert @username to AT_USER
-        tweet = re.sub(r'@[^\s]+','',tweet)
+        #Remove the retweets users
+        tweet = re.sub(r'(rt @[^\s])','',tweet)
+        #remove all the user mentioned in the tweets
+        tweet = re.sub(r'(@[^\s])','',tweet)
         #Remove additional white    spaces
-        tweet = re.sub(r'[\s]+', ' ', tweet)
-        
+        tweet = re.sub(r'@[\s]+', '', tweet)
+        #remove the initial text: preeceding each tweet
         tweet = re.sub(r'text:"','', tweet)
         #Replace #word with word
         tweet = re.sub(r'#([^\s]+)', r'\1', tweet)
         #trim
-        tweet = tweet.strip('\'"')
-        #get rid of the retweets in the text
-        tweet = tweet.strip('rt ')
+        tweet = tweet.strip('\'"')        
         return tweet
     #end
     
@@ -41,8 +44,6 @@ def Classify():
     def getStopWordList(stopWordListFileName):
         #read the stopwords file and build a list
         stopWords = []
-        stopWords.append('AT_USER')
-        stopWords.append('URL')
     
         fp = open(stopWordListFileName, 'r')
         line = fp.readline()
@@ -101,24 +102,31 @@ def Classify():
     
     # Extract feature vector for all tweets in one shote
     training_set = nltk.classify.util.apply_features(extract_features, tweets)
-    
+   
+    #Train the classifier    
     NBClassifier = nltk.NaiveBayesClassifier.train(training_set)
     
+    #Remove all the duplicate tweets.
+    uniqlines = set(open('text_tweets.txt').readlines())    
+    bar = open('unique_tweets.txt', 'w').writelines(set(uniqlines))
     
-    with open ('text_tweets.txt','r') as tweets:
+    with open ('unique_tweets.txt','r') as tweets:
         for tweet in tweets:
             processedTestTweet = processTweet(tweet)
             sentiment = NBClassifier.classify(extract_features(getFeatureVector(processedTestTweet.decode('unicode_escape').encode('ascii','ignore'))))
             #print processedTestTweet.decode('unicode_escape').encode('ascii','ignore')
             #print sentiment
+            #We write all the tweets to a positive or negative file depending on their sentiment excluding all non ascii charachters.
             with open('Summary/positive.txt','a') as pt:
                 if sentiment == "positive":
                     pt.write(processedTestTweet.decode('unicode_escape').encode('ascii','ignore') + "\n")
             with open('Summary/negative.txt','a') as nt:
                 if sentiment=="negative":
-                    nt.write(processedTestTweet.decode('unicode_escape').encode('ascii','ignore') + "\n")    
-                    
-            
+                    nt.write(processedTestTweet.decode('unicode_escape').encode('ascii','ignore') + "\n")  
                     
     
+                    
+
+                
+
     
