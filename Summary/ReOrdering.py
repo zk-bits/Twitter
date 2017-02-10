@@ -28,7 +28,7 @@ def ReOrdering():
     
     #count the number of tweets set it to a variable and then set it as the length of this or  what ever
     #This is where the text comes from
-    with open("Summary/positive.txt", "r") as pt:
+    with open("Summary/positive_unique.txt", "r") as pt:
         lines = pt.readlines()
         # Count how many lines we have
         count = len(lines)
@@ -74,16 +74,17 @@ def ReOrdering():
         pyplot.setp(lines,ms=15.0)
         pyplot.setp(lines,mew=2.0)
         data = {i: np.where(kmeans.labels_ == i)[0] for i in range(kmeans.n_clusters)}
-        #print data
+        print data
         
     pyplot.show();  
     
-    with open('Summary/positive.txt' ) as pt:
+    with open('Summary/positive_unique.txt' ) as pt:
         with open('Summary/paragraph.txt', 'w') as pt_out:
-            lines = pt.readlines()   
-            for d in data: 
-                pt_out.write(lines[d].replace('\n', '. '))
-                    
+            lines = pt.readlines()
+            for k, paragraph in data.iteritems():
+                pt_out.write('\n')      
+                for line in paragraph:
+                    pt_out.write(lines[line].replace('\n', '. '))                    
 
                 
     

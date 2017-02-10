@@ -21,13 +21,13 @@ class StdOutListener(StreamListener):
         self.num_tweets = 0
 
     def on_data(self, data):
-        print data
+        #print data
         #Creates a file called fetched_tweets
         with open('fetched_tweets.csv','a') as tf:
             #increases the number of tweets by one.
             self.num_tweets += 1
             #while the number of tweets is less than 30 it continues to write them into the file created above
-            if self.num_tweets < 30:
+            if self.num_tweets < 500:
                     tf.write(data)
             #When the number of tweets exceeds the one in the if statement it closes the connection and exits the progrm
             else:                                   
@@ -63,4 +63,4 @@ def main():
 
 
     #This line filter Twitter Streams to capture data by keywords
-    stream.filter(languages=["en"], track=[("Scotland")])
+    stream.filter(languages=["en"], track=[("Valentine")])

@@ -5,19 +5,19 @@ import Summary.Summariser as smry
 
 #Firstly we run the Tweety class, to retrwive the tweets, and copy just the actual text into a text file
 print "\n Retrieving Tweets"
-tw.main()
+#tw.main()
 print "\n Retrieving Tweets: √"
 
 
 print "\n Classifying Tweets"
 #We now clean up the data in the text file, the tweets, and we then apply a naïve Bayes Classifier, which divides the tweets into a positive and a negative file.
-anl.Classify()
+#anl.Classify()
 print "\n Classifying Tweets: √"
 
-
+ 
 print "\n Reordering Tweets and arranging them into paragraphs"
 #We then create an array of the similarity that each tweet has to all the other tweets and divide them into paragraphs accordingly
-rord.ReOrdering()
+#rord.ReOrdering()
 print "\n Reordering Tweets and arranging them into paragraphs: √"
  
  

@@ -107,10 +107,8 @@ def Classify():
     NBClassifier = nltk.NaiveBayesClassifier.train(training_set)
     
     #Remove all the duplicate tweets.
-    uniqlines = set(open('text_tweets.txt').readlines())    
-    bar = open('unique_tweets.txt', 'w').writelines(set(uniqlines))
-    
-    with open ('unique_tweets.txt','r') as tweets:
+
+    with open ('text_tweets.txt','r') as tweets:
         for tweet in tweets:
             processedTestTweet = processTweet(tweet)
             sentiment = NBClassifier.classify(extract_features(getFeatureVector(processedTestTweet.decode('unicode_escape').encode('ascii','ignore'))))
@@ -123,7 +121,8 @@ def Classify():
             with open('Summary/negative.txt','a') as nt:
                 if sentiment=="negative":
                     nt.write(processedTestTweet.decode('unicode_escape').encode('ascii','ignore') + "\n")  
-                    
+    #Remove all the duplicate tweets.
+    unique.unique()        
     
                     
 
